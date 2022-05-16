@@ -6,12 +6,25 @@ export const unpkgPathPlugin = () => {
     name: 'unpkg-path-plugin',
     setup(build: esbuild.PluginBuild) {
       build.onResolve({ filter: /.*/ }, async (args: any) => {
-        console.log('onResole', args);
+        console.log('onResolve', args);
         if (args.path === 'index.js') {
           return { path: args.path, namespace: 'a' };
-        } else if (args.path === 'tiny-test-pkg') {
+        }
+        // else if (args.path === 'tiny-test-pkg') {
+        //   return {
+        //     path: 'https://unpkg.com/tiny-test-pkg@1.0.0/index.js',
+        //     namespace: 'a',
+        //   };
+        // }
+
+        if (args.path.includes('./') || args.path.includes('../')) {
           return {
-            path: 'https://unpkg.com/tiny-test-pkg@1.0.0/index.js',
+            namespace: 'a',
+            path: new URL(args.path, args.importer + '/').href,
+          };
+        } else {
+          return {
+            path: `https://unpkg.com/${args.path}`,
             namespace: 'a',
           };
         }
@@ -24,13 +37,12 @@ export const unpkgPathPlugin = () => {
           return {
             loader: 'jsx',
             contents: `
-              const message = require('tiny-test-pkg');
+              const message = require('medium-test-pkg');
               console.log(message);
             `,
           };
         }
-
-        const { data } = await axios.get(args.path);
+        let { data } = await axios.get(args.path);
         return {
           loader: 'jsx',
           contents: data,
