@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import 'bulmaswatch/superhero/bulmaswatch.min.css';
+import Resizable from './resizable';
 
 import CodeEditor from './code-editor';
 import Preview from './preview';
@@ -15,16 +16,15 @@ const CodeCell = () => {
   };
 
   return (
-    <div>
-      <CodeEditor
-        initialValue="const a = 1;"
-        onChangeEditor={value => setInput(value)}
-      />
-      <div>
-        <button onClick={onClickHandler}>Submit</button>
+    <Resizable direction="horizontal">
+      <div style={{ height: '100%', display: 'flex', flexDirection: 'row' }}>
+        <CodeEditor
+          initialValue="const a = 1;"
+          onChangeEditor={value => setInput(value)}
+        />
+        <Preview code={code} />
       </div>
-      <Preview code={code} />
-    </div>
+    </Resizable>
   );
 };
 

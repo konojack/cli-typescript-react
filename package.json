@@ -11,6 +11,7 @@
     "@types/node": "^16.11.31",
     "@types/react": "^18.0.8",
     "@types/react-dom": "^18.0.0",
+    "@types/react-resizable": "^3.0.0",
     "axios": "^0.27.2",
     "bulmaswatch": "^0.8.1",
     "esbuild-wasm": "0.8.27",
@@ -21,6 +22,7 @@
     "prettier": "^2.6.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-resizable": "^3.0.4",
     "react-scripts": "5.0.1",
     "typescript": "^4.6.3",
     "web-vitals": "^2.1.4"
