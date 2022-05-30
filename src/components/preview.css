@@ -7,7 +7,6 @@
 .preview-wrapper iframe {
   height: 100%;
   width: 100%;
-  background: #fff;
 }
 /* hack to always can resize without a bug on mouse */
 .react-draggable-transparent-selection .preview-wrapper:after {
