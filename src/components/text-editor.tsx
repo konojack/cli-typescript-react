@@ -1,0 +1,44 @@
+import MDEditor from '@uiw/react-md-editor';
+import { useState, useEffect, useRef } from 'react';
+
+const TextEditor = () => {
+  const [editing, setEditing] = useState(false);
+  const ref = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const listener = (event: MouseEvent) => {
+      if (
+        ref.current &&
+        event.target &&
+        ref.current.contains(event.target as Node)
+      ) {
+        console.log('elemnt clicked on is inside editor');
+        return;
+      }
+
+      console.log(event.target);
+      setEditing(false);
+    };
+
+    document.addEventListener('click', listener, { capture: true });
+
+    return () => {
+      document.removeEventListener('click', listener, { capture: true });
+    };
+  }, []);
+
+  if (editing) {
+    return (
+      <div ref={ref}>
+        <MDEditor />
+      </div>
+    );
+  }
+
+  return (
+    <div onClick={() => setEditing(true)}>
+      <MDEditor.Markdown source="Haha" />
+    </div>
+  );
+};
+
+export default TextEditor;
