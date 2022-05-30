@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import 'bulmaswatch/superhero/bulmaswatch.min.css';
 import Resizable from './resizable';
 
@@ -10,10 +10,16 @@ const CodeCell = () => {
   const [input, setInput] = useState<string | undefined>('');
   const [code, setCode] = useState<string>('');
 
-  const onClickHandler = async () => {
-    const output = await bundle(input);
-    setCode(output);
-  };
+  useEffect(() => {
+    const timer = setTimeout(async () => {
+      const output = await bundle(input);
+      setCode(output);
+    }, 750);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [input]);
 
   return (
     <Resizable direction="vertical">
