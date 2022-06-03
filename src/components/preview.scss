@@ -1,19 +1,21 @@
-.preview-wrapper {
-  position: relative;
-  height: 100%;
-  flex: 1;
-}
+.preview {
+  &-wrapper {
+    position: relative;
+    height: 100%;
+    flex: 1;
+  }
 
-.preview-wrapper iframe {
-  height: 100%;
-  width: 100%;
-}
+  &-error {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: red;
+  }
 
-.preview-error {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  color: red;
+  iframe {
+    height: 100%;
+    width: 100%;
+  }
 }
 
 /* hack to always can resize without a bug on mouse */

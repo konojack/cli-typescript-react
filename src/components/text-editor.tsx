@@ -1,5 +1,6 @@
 import MDEditor from '@uiw/react-md-editor';
 import { useState, useEffect, useRef } from 'react';
+import './text-editor.scss';
 
 const TextEditor = () => {
   const [editing, setEditing] = useState(false);
@@ -11,11 +12,9 @@ const TextEditor = () => {
         event.target &&
         ref.current.contains(event.target as Node)
       ) {
-        console.log('elemnt clicked on is inside editor');
         return;
       }
 
-      console.log(event.target);
       setEditing(false);
     };
 

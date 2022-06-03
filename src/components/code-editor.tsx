@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import './code-editor.css';
+import './code-editor.scss';
 import MonacoEditor, { OnMount, OnChange } from '@monaco-editor/react';
 import prettier from 'prettier';
 import parser from 'prettier/parser-babel';
