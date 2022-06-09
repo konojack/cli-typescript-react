@@ -4,6 +4,7 @@ import './text-editor.scss';
 
 const TextEditor = () => {
   const [editing, setEditing] = useState(false);
+  const [value, setValue] = useState('# Header');
   const ref = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     const listener = (event: MouseEvent) => {
@@ -28,14 +29,16 @@ const TextEditor = () => {
   if (editing) {
     return (
       <div className="text-editor" ref={ref}>
-        <MDEditor />
+        <MDEditor value={value} onChange={v => setValue(v || '')} />
       </div>
     );
   }
 
   return (
-    <div className="text-editor" onClick={() => setEditing(true)}>
-      <MDEditor.Markdown source="Haha" />
+    <div className="text-editor card" onClick={() => setEditing(true)}>
+      <div className="card-content">
+        <MDEditor.Markdown source={value} />
+      </div>
     </div>
   );
 };
