@@ -3,6 +3,11 @@
     position: relative;
     height: 100%;
     flex: 1;
+
+    iframe {
+      height: 100%;
+      width: 100%;
+    }
   }
 
   &-error {
@@ -10,11 +15,6 @@
     top: 10px;
     left: 10px;
     color: red;
-  }
-
-  iframe {
-    height: 100%;
-    width: 100%;
   }
 }
 
