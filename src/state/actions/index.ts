@@ -14,7 +14,7 @@ export interface DeleteCellAction {
   payload: string;
 }
 export interface InsertCellBeforeAction {
-  type: ActionType.INSERT_CELL_BEFORE;
+  type: ActionType.INSERT_CELL_AFTER;
   payload: {
     id: string | null;
     type: CellTypes;

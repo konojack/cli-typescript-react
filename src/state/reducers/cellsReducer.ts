@@ -42,7 +42,7 @@ const reducer = (
         delete draft.data[action.payload];
         draft.order = draft.order.filter(id => id !== action.payload);
         return draft;
-      case ActionType.INSERT_CELL_BEFORE:
+      case ActionType.INSERT_CELL_AFTER:
         const cell: Cell = {
           id: randomId(),
           type: action.payload.type,
@@ -55,9 +55,9 @@ const reducer = (
         );
 
         if (foundIndex < 0) {
-          draft.order.push(cell.id);
+          draft.order.unshift(cell.id);
         } else {
-          draft.order.splice(foundIndex, 0, cell.id);
+          draft.order.splice(foundIndex + 1, 0, cell.id);
         }
 
         return draft;
