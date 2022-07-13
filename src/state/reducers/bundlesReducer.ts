@@ -18,6 +18,7 @@ const reducer = (
   return produce(state, draft => {
     switch (action.type) {
       case ActionType.BUNDLE_CREATED:
+        draft[action.payload.cellId] = action.payload.bundle;
         return draft;
       default:
         return draft;

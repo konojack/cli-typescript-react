@@ -31,8 +31,11 @@ export interface UpdateCellAction {
 export interface BundleCreatedAction {
   type: ActionType.BUNDLE_CREATED;
   payload: {
-    code: string;
-    err: string;
+    cellId: string;
+    bundle: {
+      code: string;
+      err: string;
+    };
   };
 }
 

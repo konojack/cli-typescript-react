@@ -1,33 +1,19 @@
-import { useEffect, useState } from 'react';
 import 'bulmaswatch/superhero/bulmaswatch.min.css';
 import Resizable from './resizable';
 
 import CodeEditor from './code-editor';
 import Preview from './preview';
-import bundle from '../bundler';
 import { Cell } from '../state';
 import { useActions } from '../hooks/use-actions';
+import { useTypedSelector } from '../hooks/use-typed-selector';
 
 interface CodeCellProps {
   cell: Cell;
 }
 
 const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
-  const [err, setErr] = useState<string | undefined>('');
-  const [code, setCode] = useState<string>('');
   const { updateCell } = useActions();
-
-  useEffect(() => {
-    const timer = setTimeout(async () => {
-      const output = await bundle(cell.content);
-      setCode(output.code);
-      setErr(output.err);
-    }, 750);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [cell.content]);
+  const bundle = useTypedSelector(state => state.bundles[cell.id]);
 
   return (
     <Resizable direction="vertical">
@@ -44,7 +30,7 @@ const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
             onChangeEditor={value => updateCell(cell.id, value!)}
           />
         </Resizable>
-        <Preview code={code} err={err} />
+        <Preview code={bundle?.code} err={bundle?.err} />
       </div>
     </Resizable>
   );
